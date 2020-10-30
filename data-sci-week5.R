@@ -51,5 +51,24 @@ readLines(file, n = 4)
 buoy44025 <- read_table(file, 
                         col_names = FALSE,
                         skip = 2)
-?scan
+
+# Using scan() to read in the appropriate lines then tidy the results and name the columns measure_units:
+buoy_v1 <- scan(file, nlines = 1, what = character())
+
+# removing number sign before YY:
+buoy_v1 <- scan(file, nlines = 1, what = character()) %>%
+  str_remove("#")
+
+# contains measurement values through replace:
+buoy_v2 <- scan(file, skip = 1, nlines = 1, what = character()) %>%
+  str_remove("#") %>%
+  str_replace("/", "per")
+
+# combining the vector into a single vector:
+combvector <- paste(buoy_v1, buoy_v2, sep = "_")
+
+# making combvector the names of the heading:
+names(buoy44025) <- combvector
+names(buoy44025)
+
 
