@@ -9,5 +9,19 @@ hdi2 <- hdi %>%
 
 # filtering the dataset to exclude the missing observations:
 hdi3 <- hdi2[!is.na(hdi2$Index),]
-hdi4 <- hdi3[!is.na(hdi3$HDI.Rank..2018.),]
+
+# summarising the dataset with NAs removed
+hdi3_summary <- hdi3 %>% 
+  group_by(Country) %>% 
+  summarise(mean_index = mean(Index),
+            n = length(Index))
+
+hdi3_summary <- hdi3 %>% 
+  group_by(Country) %>% 
+  summarise(mean_index = mean(Index),
+            n = length(Index),
+            sd = sd(Index),
+            se = sd/sqrt(n))
+
+
 
