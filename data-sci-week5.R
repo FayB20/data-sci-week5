@@ -1,3 +1,4 @@
+# TASK 1:
 # Reading the file in:
 hdi <- read.csv("Human-development-index.csv")
 
@@ -43,3 +44,12 @@ hdi4_summary %>%
                    name = "") +
   theme_classic() +
   coord_flip()
+
+# TASK 2:
+file <- "http://www.ndbc.noaa.gov/view_text_file.php?filename=44025h2011.txt.gz&dir=data/historical/stdmet/"
+readLines(file, n = 4)
+buoy44025 <- read_table(file, 
+                        col_names = FALSE,
+                        skip = 2)
+?scan
+
